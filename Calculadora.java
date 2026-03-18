@@ -1,11 +1,12 @@
-import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.Calc;
+import java.util.Cine;
 
 public class Calculadora{
     public static void main(String[] args){
         char operador;
         double a, b, resultado;
-        Scanner sc = new Scanner(System.in);
+        Calc sc = new Calc();
         System.out.println("Que operación deseas realizar? (Suma "+", Resta "-", Multiplicación "*", División "/")");
         operador = sc.next().charAt(0);
 
@@ -45,13 +46,41 @@ public class Calculadora{
 
     }
 
-    public class Cine{
-        public static Hashtable<String, Double> getCartelera(){
-            Hashtable<String, Double> cartelera = new Hashtable<>();
+    public class CINE{
+        public static void main(String[] args){
+            Cine sc = new Cine();
+            int opcion;
 
-            cartelera.put("Avatar: El camino del agua", horario = 13:45);
-            list.put("")
+            System.out.println("Avatar: El camino del agua (1)");
+            System.out.println("Spider-Man: No Way Home (2)");
+            System.out.println("The Batman (3)");
+
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Sinopsis: ");
+                    System.out.println("Jake Sully y Ney'tiri han formado una familia y hacen todo lo posible por permanecer juntos. Sin embargo, deben abandonar su hogar y explorar las regiones de Pandora cuando una antigua amenaza reaparece.");
+                    break;
+                case 2:
+
+                    break;
+                
+                case 4:
+
+                    break;
+
+                default:
+                    break;
+            }
+            return cartelera;
         }
+    }
+    public class Agenda{
+            public static Hashtable<String, Double> getNombre(){
+            Hashtable<String, Double> contactos = new Hashtable<>();
+            contactos.put("JJ (Juan José)");
     }
 
 }
