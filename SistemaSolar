@@ -1,0 +1,168 @@
+import java.util.*;
+
+// Clase base
+class Universo {
+    String nombre = "Universo";
+
+    public String getJerarquia() {
+        return "Universo";
+    }
+}
+
+// Astro hereda de Universo
+class Astro extends Universo {
+    String nombre;
+    String color;
+    String ubicacion;
+    double masa;
+    double densidad;
+    double distancia;
+
+    public Astro(String nombre, String color, String ubicacion,
+                 double masa, double densidad, double distancia) {
+        this.nombre = nombre;
+        this.color = color;
+        this.ubicacion = ubicacion;
+        this.masa = masa;
+        this.densidad = densidad;
+        this.distancia = distancia;
+    }
+
+    @Override
+    public String getJerarquia() {
+        return super.getJerarquia() + " -> Astro";
+    }
+
+    public void mostrarInfo() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Color: " + color);
+        System.out.println("Ubicación: " + ubicacion);
+        System.out.println("Masa: " + masa);
+        System.out.println("Densidad: " + densidad);
+        System.out.println("Distancia: " + distancia);
+    }
+}
+
+// Lucero hereda de Astro
+class Lucero extends Astro {
+
+    public Lucero(String nombre, String color, String ubicacion,
+                  double masa, double densidad, double distancia) {
+        super(nombre, color, ubicacion, masa, densidad, distancia);
+    }
+
+    @Override
+    public String getJerarquia() {
+        return super.getJerarquia() + " -> Lucero";
+    }
+}
+
+// Estrella
+class Estrella extends Lucero {
+
+    public Estrella(String nombre, String color, String ubicacion,
+                    double masa, double densidad, double distancia) {
+        super(nombre, color, ubicacion, masa, densidad, distancia);
+    }
+
+    @Override
+    public String getJerarquia() {
+        return super.getJerarquia() + " -> Estrella";
+    }
+}
+
+// Planeta
+class Planeta extends Astro {
+    boolean habitable;
+
+    public Planeta(String nombre, String color, String ubicacion,
+                   double masa, double densidad, double distancia,
+                   boolean habitable) {
+        super(nombre, color, ubicacion, masa, densidad, distancia);
+        this.habitable = habitable;
+    }
+
+    @Override
+    public String getJerarquia() {
+        return super.getJerarquia() + " -> Planeta";
+    }
+
+    @Override
+    public void mostrarInfo() {
+        super.mostrarInfo();
+        System.out.println("Habitable: " + habitable);
+    }
+}
+
+// Cometa
+class Cometa extends Astro {
+
+    public Cometa(String nombre, String color, String ubicacion,
+                  double masa, double densidad, double distancia) {
+        super(nombre, color, ubicacion, masa, densidad, distancia);
+    }
+
+    @Override
+    public String getJerarquia() {
+        return super.getJerarquia() + " -> Cometa";
+    }
+}
+
+// MAIN
+public class SistemaSolar {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Map<String, Astro> baseDatos = new HashMap<>();
+
+        // Ejemplo: Tierra
+        baseDatos.put("tierra", new Planeta(
+                "Tierra",
+                "Azul",
+                "Sistema Solar",
+                5.97e24,
+                5.51,
+                149.6,
+                true
+        ));
+
+        // Ejemplo: Sol
+        baseDatos.put("sol", new Estrella(
+                "Sol",
+                "Amarillo",
+                "Sistema Solar",
+                1.99e30,
+                1.41,
+                0
+        ));
+
+        // Ejemplo: Cometa
+        baseDatos.put("halley", new Cometa(
+                "Halley",
+                "Blanco",
+                "Órbita solar",
+                2.2e14,
+                0.6,
+                88
+        ));
+
+        System.out.print("Busca un astro por nombre: ");
+        String busqueda = sc.nextLine().toLowerCase();
+
+        if (baseDatos.containsKey(busqueda)) {
+            Astro a = baseDatos.get(busqueda);
+
+            System.out.println("\n--- INFORMACIÓN ---");
+            a.mostrarInfo();
+
+            System.out.println("\nTipo: " + a.getClass().getSimpleName());
+            System.out.println("Jerarquía: " + a.getJerarquia());
+
+        } else {
+            System.out.println("No encontrado en la base de datos.");
+        }
+
+        sc.close();
+    }
+}
